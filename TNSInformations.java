@@ -4,11 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javafx.collections.FXCollections;
 
 /**
  * Tns object representation
@@ -28,7 +27,7 @@ public class TNSInformations {
 	private String serviceName;
 
 	public TNSInformations() {
-		this.aliasList = FXCollections.observableArrayList();
+		this.aliasList = new ArrayList<>();
 		this.path = null;
 	}
 
@@ -73,7 +72,7 @@ public class TNSInformations {
 	}
 
 	/**
-	 * Extract all Alias by Tns file
+	 * Extract all Alias from Tns file
 	 * 
 	 * @param file
 	 * @return this
