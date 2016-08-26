@@ -73,7 +73,7 @@ public class TNSInformations {
 	}
 
 	/**
-	 * Extract all Alias from Tns file
+	 * Extract all Alias by Tns file
 	 * 
 	 * @param file
 	 * @return this
