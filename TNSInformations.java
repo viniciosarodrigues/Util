@@ -1,4 +1,4 @@
-package com.util.nivsoft.services;
+package com.nivsoft.util;
 
 import java.io.BufferedReader;
 import java.io.File;
