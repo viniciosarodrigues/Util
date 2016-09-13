@@ -97,7 +97,7 @@ public class TNSInformations {
 					// Set Matcher into line
 					Matcher matcher = r.matcher(line);
 					if (matcher.find()) {
-						this.aliasList.add(matcher.group().toUpperCase());
+						this.aliasList.add(matcher.group());
 					}
 					line = readFileBuffer.readLine();
 				}
@@ -135,22 +135,31 @@ public class TNSInformations {
 
 				while (line != null) {
 					if (line.trim().contains(alias)) {
-						while (haveHost || havePort || haveService) {
-							if (line.trim().contains("HOST")) {
-								host = getHostByLine(line);
-								haveHost = false;
+						if (line.indexOf(alias) < line.indexOf("=")) {
+							Boolean find = line.substring(line.indexOf(alias), line.indexOf("=")).trim().equals(alias);
+							if (find) {
+								while (haveHost || havePort || haveService) {
+									if (line.trim().contains("HOST")) {
+										host = getHostByLine(line);
+										haveHost = false;
+									}
+									if (line.trim().contains("PORT")) {
+										port = getPortByLine(line);
+										havePort = false;
+									}
+									if (line.trim().contains("SERVICE_NAME")) {
+										serviceName = getServiceNameByLine(line);
+										haveService = false;
+									}
+									if (line.trim().contains("SID")) {
+										serviceName = getSIDByLine(line);
+										haveService = false;
+									}
+									line = readFileBuffer.readLine();
+								}
+								break;
 							}
-							if (line.trim().contains("PORT")) {
-								port = getPortByLine(line);
-								havePort = false;
-							}
-							if (line.trim().contains("SERVICE_NAME")) {
-								serviceName = getServiceNameByLine(line);
-								haveService = false;
-							}
-							line = readFileBuffer.readLine();
 						}
-						break;
 					}
 					line = readFileBuffer.readLine();
 				}
@@ -199,6 +208,19 @@ public class TNSInformations {
 		line = line.substring(line.indexOf("SERVICE_NAME"));
 		line = line.substring(0, line.indexOf(")"));
 		line = line.replace("SERVICE_NAME", "").replace("=", "").trim();
+		return line;
+	}
+
+	/**
+	 * Get service name by line
+	 * 
+	 * @param line
+	 * @return SERVICE_NAME
+	 */
+	public String getSIDByLine(String line) {
+		line = line.substring(line.indexOf("SID"));
+		line = line.substring(0, line.indexOf(")"));
+		line = line.replace("SID", "").replace("=", "").trim();
 		return line;
 	}
 
