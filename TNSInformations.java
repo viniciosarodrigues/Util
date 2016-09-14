@@ -10,7 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Tns object representation
+ * This class performs the process of reading files " tnsnames.ora "
+ * capturing the information from each base filtered by the alias name.
+ * 
+ * In the main method is performed a sample.
  * 
  * @author vinicios.rodrigues
  *
